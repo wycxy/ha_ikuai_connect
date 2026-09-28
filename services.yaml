@@ -1,0 +1,113 @@
+get_traffic_ranking:
+  fields:
+    device_id:
+      required: false
+      selector:
+        device:
+          integration: ikuai_connect
+
+get_protocol_stats:
+  fields:
+    device_id:
+      required: false
+      selector:
+        device:
+          integration: ikuai_connect
+    mac:
+      required: true
+      example: "10:b7:13:91:21:9b"
+      selector:
+        text:
+    ip:
+      required: false
+      example: "10.10.10.158"
+      selector:
+        text:
+
+get_offline_history:
+  fields:
+    device_id:
+      required: false
+      selector:
+        device:
+          integration: ikuai_connect
+
+add_mac_rule:
+  fields:
+    device_id:
+      required: false
+      selector:
+        device:
+          integration: ikuai_connect
+    mac:
+      required: true
+      example: "08:9b:4b:00:10:2e"
+      selector:
+        text:
+    tagname:
+      required: false
+      example: "孩子平板限网"
+      selector:
+        text:
+    expires:
+      required: false
+      default: 0
+      selector:
+        number:
+          min: 0
+          mode: box
+
+delete_mac_rule:
+  fields:
+    device_id:
+      required: false
+      selector:
+        device:
+          integration: ikuai_connect
+    rule_id:
+      required: true
+      selector:
+        number:
+          min: 1
+          mode: box
+
+call_api_service:
+  fields:
+    device_id:
+      required: false
+      selector:
+        device:
+          integration: ikuai_connect
+    path:
+      required: true
+      example: /api/v4.0/monitoring/clients-online
+      selector:
+        text:
+    method:
+      required: false
+      default: GET
+      selector:
+        select:
+          options:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+    params:
+      required: false
+      example: '{"limit": 500}'
+      selector:
+        text:
+    timeout:
+      required: false
+      default: 15
+      selector:
+        number:
+          min: 1
+          max: 120
+          mode: box
+    return_raw:
+      required: false
+      default: false
+      selector:
+        boolean:
